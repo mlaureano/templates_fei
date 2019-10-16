@@ -1,0 +1,156 @@
+%-----------------------------------------------------------------------------------------------------
+%% fei --- classe para apresentações da equipe robofei
+%% Author: Marcos Laureano
+%% E-mail: marcos.laureano@ifpr.edu.br
+%% 
+%% Released under the LaTeX Project Public License v1.3c or later
+%% See http://www.latex-project.org/lppl.txt
+%% -----------------------------------------------------------------------------------------------------
+
+\mode<presentation>
+
+\RequirePackage{graphicx}
+\RequirePackage{tikz}
+%\RequirePackage[many]{tcolorbox}
+
+\newenvironment<>{exemplo_red}[1]{%
+    \setbeamercolor{block title}{fg=white,bg=red!75!black}%
+    \setbeamercolor{block body}{bg=red!20!white}%
+    \begin{block}#2{#1}}{\end{block}}
+
+\newenvironment<>{exemplo_blue}[1]{%
+    \setbeamercolor{block title}{fg=white,bg=blue!75!black}%
+    \setbeamercolor{block body}{bg=blue!20!white}%
+    \begin{block}#2{#1}}{\end{block}}
+
+
+%blocos com sombra
+\newenvironment<>{exemplo_red_shadow}[2]{%
+    \setbeamercolor{block title}{fg=white,bg=red!75!black}%
+    \setbeamercolor{block body}{bg=red!20!white}%
+    \begin{beamerboxesrounded}[shadow=true]{#1}%
+        {#2}
+\end{beamerboxesrounded}}%  
+
+
+\newenvironment<>{exemplo_blue_shadow}[2]{%
+    \setbeamercolor{block title}{fg=white,bg=blue!75!black}%
+    \setbeamercolor{block body}{bg=blue!20!white}%
+    \begin{beamerboxesrounded}[shadow=true]{#1}%
+        {#2}
+\end{beamerboxesrounded}}%     
+
+\newcommand\extra[1]{\renewcommand\@extra{#1}}
+\newcommand\@extra{}
+
+\newcommand\footline[1]{\renewcommand\@footline{#1}}
+\newcommand\@footline{}
+
+
+\definecolor{feiblue}{RGB}{25,84,166} % use structure theme to change
+
+\setbeamercolor{structure}{fg=feiblue}
+
+\setbeamercolor{page number in head/foot}{fg=white}
+
+
+\defbeamertemplate*{title page}{fei}[1][]
+{
+  \tikz[remember picture,overlay]%
+  \node[inner sep=0cm, xshift=3.75mm, yshift=-9.75mm, anchor=north west]%
+  at (current page.north west)%
+  {\includegraphics[width=15mm, height=15mm, keepaspectratio]{robo-fei-logo.pdf}};
+  \tikz[remember picture,overlay]%
+  \node[inner sep=0cm, xshift=3.75mm, yshift=-22.5mm, anchor=north west]%
+  at (current page.north west)%
+  {\@extra};
+  \tikz[remember picture,overlay]%
+  \node[yshift=-3mm, inner sep=2.5mm, anchor=south]%
+  at (current page.south)%
+  {\includegraphics[trim=20cm 0 21cm 0, width=\paperwidth]{linha_inicial.pdf}};
+  \vskip 2mm
+  \begin{beamercolorbox}[leftskip=13mm, #1]{title}
+    \usebeamerfont{title}\inserttitle\par%
+    \ifx\insertsubtitle\@empty%
+    \else%
+    \vspace{2mm}
+    {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+    \fi%
+  \end{beamercolorbox}\vspace{4mm}
+  \begin{beamercolorbox}[leftskip=13mm,#1]{author}
+    \usebeamerfont{author}\insertauthor
+  \end{beamercolorbox}\vspace{2mm}
+  \begin{beamercolorbox}[leftskip=13mm,#1]{institute}
+    \usebeamerfont{institute}\insertinstitute
+  \end{beamercolorbox}\vspace{2mm}
+  \begin{beamercolorbox}[leftskip=13mm,#1]{date}
+    \usebeamerfont{date}\insertdate
+  \end{beamercolorbox}
+}
+
+
+\defbeamertemplate*{navigation symbols}{fei}{}
+
+\defbeamertemplate*{footline}{fei}
+{
+  \tikz[remember picture,overlay]%
+  \node[yshift=-1pt,inner sep=0pt,anchor=south]%
+  at (current page.south)%
+  {\includegraphics[
+   trim=18cm 0 15cm 0,
+   width=\paperwidth,
+   height=11mm]{barra_inferior_logo_fei.pdf}
+  };
+  \vskip 0.10\paperheight
+  \hspace{25mm}%
+  \usebeamercolor[fg]{page number in head/foot}%
+  \usebeamerfont{page number in head/foot}%
+  \parbox[c][8mm][c]{0.70\paperwidth}{\@footline}
+  \hfill%
+  \insertframenumber\,/\,\inserttotalframenumber\kern10pt\vskip4pt%
+}
+
+\defbeamertemplate*{frametitle}{fei}[1][left]
+{
+  \ifbeamercolorempty[bg]{frametitle}{}{\nointerlineskip}%
+  \@tempdima=\textwidth%
+  \advance\@tempdima by\beamer@leftmargin%
+  \advance\@tempdima by\beamer@rightmargin%
+  \begin{beamercolorbox}[#1,wd=\the\@tempdima]{frametitle}
+    \usebeamerfont{frametitle}%
+    \vspace{0cm}
+    \begin{minipage}[t][][c]{15mm}
+      \tikz \node[inner sep=2.5mm] {\includegraphics[height=10mm]{robo-fei-logo.pdf}};
+    \end{minipage}%
+    \begin{minipage}[t][][c]{0.8\paperwidth}
+      \vspace{8pt}
+      \ifx\insertframesubtitle\@empty%
+        \vspace{6pt}%
+      \fi%
+      \usebeamerfont{frametitle}%
+      \vbox{}\vskip-1ex%
+    \if@tempswa\else\csname beamer@fte#1\endcsname\fi%
+      \strut\insertframetitle\strut\par%
+      {%
+        \ifx\insertframesubtitle\@empty%
+      \else%
+        {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}%
+        \insertframesubtitle\strut\par}%
+      \fi
+    }%
+    \vskip-1ex%
+  \if@tempswa\else\vskip-.3cm\fi%
+  \end{minipage}%
+  \end{beamercolorbox}%
+}
+
+%esse trecho coloca uma marca dágua, tirei pois não ficou muito legal, quem quiser testar é só descomentar
+%\setbeamertemplate{background}{%
+%    \begin{tikzpicture}[overlay,remember picture]
+%    \node[anchor=north west,scale=.5] at ([shift={(4.3in,-2.8in)}]current page.north west) {\includegraphics[width=.25\textwidth]{logo_fei_cinza.pdf}};
+%    \end{tikzpicture}%
+%}
+
+
+\mode
+<all>

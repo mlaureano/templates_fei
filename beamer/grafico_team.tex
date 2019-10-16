@@ -1,0 +1,69 @@
+\documentclass[varwidth]{standalone}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{pgfplots}
+    \usepackage{adjustbox}
+\pgfplotsset{compat=newest}
+\usetikzlibrary{positioning, backgrounds}
+\begin{document}
+        
+        \begin{tikzpicture}[scale=.5,framed]
+        \centering
+        \begin{axis}[legend columns=1,
+        ymajorgrids, tick align=inside,
+        major grid style={draw=white},
+        enlarge y limits={value=0,upper},
+        axis x line*=bottom,
+        axis y line*=right,
+        y axis line style={opacity=0},
+        enlarge x limits=true, scale=1,
+        ybar,
+        enlargelimits=.5,
+        legend style={at={(0.5,-0.15)},
+            anchor=north,legend columns=-1},
+        symbolic x coords={Blue, Yellow},
+        xtick=data,
+        every node near coord/.append style={rotate=90, anchor=west},
+        nodes near coords,
+        nodes near coords align={vertical},bar width=10pt,title=Team Analysis,
+        ]
+        \addplot [draw=none, fill=blue!30] coordinates {
+            (Blue,61.29)
+            (Yellow,38.71) 
+        };
+        
+        \addplot [draw=none, fill=green!30] coordinates {
+            (Blue,81.90)
+            (Yellow,62.27) 
+        };        
+        
+        \addplot [draw=none, fill=red!30] coordinates {
+            (Blue,37.73)
+            (Yellow,18.1) 
+        }; 
+        
+        \addplot [draw=none, fill=brown!30] coordinates {
+            (Blue,67.73)
+            (Yellow,43.1) 
+        }; 
+        
+        \addplot [draw=none, fill=orange!30] coordinates {
+            (Blue,59.98)
+            (Yellow,39.61) 
+        }; 
+        
+        \addplot [draw=none, fill=black!30] coordinates {
+            (Blue,89.34)
+            (Yellow,76.92) 
+        }; 
+        
+        \addplot [draw=none, fill=gray!30] coordinates {
+            (Blue,91.27)
+            (Yellow,73.45) 
+        }; 
+        
+        \legend{Indirects charge, Passes successfully, Blocks successfully, Atuation area on pass,
+            Atuation area on block, Improved Atuation area on pass, Improved Atuation arean on block }
+        \end{axis}
+        \end{tikzpicture}
+\end{document}
